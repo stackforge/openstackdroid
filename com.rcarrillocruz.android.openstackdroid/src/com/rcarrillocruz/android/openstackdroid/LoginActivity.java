@@ -1,15 +1,19 @@
 package com.rcarrillocruz.android.openstackdroid;
 
+import android.app.ListActivity;
+import android.widget.ArrayAdapter;
 import android.os.Bundle;
-import android.app.Activity;
 import android.view.Menu;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        String[] profiles = new String[] {"admin on Development cloud", "devops on Testing"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, profiles);
+        
+        setListAdapter(adapter);
     }
 
 
