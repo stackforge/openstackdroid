@@ -1,18 +1,29 @@
 package com.rcarrillocruz.android.openstackdroid;
 
 public class ConnectionProfile {
+	
+	private String profileName;
 	private String username;
 	private String password;
 	private String tenantId;
 	private String connectionURL;
 	
-	public ConnectionProfile(String username, String password, String tenantId,
+	public ConnectionProfile(String profileName, String username, String password, String tenantId,
 			String connectionURL) {
 		super();
+		this.profileName = profileName;
 		this.username = username;
 		this.password = password;
 		this.tenantId = tenantId;
 		this.connectionURL = connectionURL;
+	}
+
+	public String getProfileName() {
+		return profileName;
+	}
+
+	public void setProfileName(String profileName) {
+		this.profileName = profileName;
 	}
 
 	public String getUsername() {
@@ -46,4 +57,6 @@ public class ConnectionProfile {
 	public void setConnectionURL(String connectionURL) {
 		this.connectionURL = connectionURL;
 	}
+	
+	
 }
