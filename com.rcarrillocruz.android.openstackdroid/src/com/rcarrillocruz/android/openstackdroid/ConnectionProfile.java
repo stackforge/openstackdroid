@@ -58,5 +58,7 @@ public class ConnectionProfile {
 		this.connectionURL = connectionURL;
 	}
 	
-	
+	public String toString() {
+		return getProfileName();
+	}
 }
