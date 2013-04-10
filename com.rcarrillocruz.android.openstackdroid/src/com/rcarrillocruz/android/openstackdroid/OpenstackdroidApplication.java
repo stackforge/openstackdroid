@@ -2,7 +2,7 @@ package com.rcarrillocruz.android.openstackdroid;
 
 import android.app.Application;
 
-public class OpenstackDroidApplication extends Application {
+public class OpenstackdroidApplication extends Application {
 	private String token;
 	
 	@Override
