@@ -10,8 +10,14 @@ public class LoginActivity extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String[] profiles = new String[] {"admin on Development cloud", "devops on Testing"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, profiles);
+        
+        ConnectionProfile[] profiles = { 
+        		new ConnectionProfile("admin on Testing cloud", "admin", "opsware", "1","http://192.168.1.20:5000"+"/v2.0/tokens"),
+        		new ConnectionProfile("devops on Production", "devops", "lol", "2", "http://192.168.1.20:5000"+"/v2.0/tokens")
+        };		
+        
+        
+        ArrayAdapter<ConnectionProfile> adapter = new ArrayAdapter<ConnectionProfile>(this, android.R.layout.simple_list_item_1, profiles);
         
         setListAdapter(adapter);
     }
