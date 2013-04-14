@@ -8,6 +8,8 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="14" />
 
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    
     <application
         android:name="OpenstackdroidApplication"
         android:allowBackup="true"
@@ -23,6 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service android:name="com.rcarrillocruz.android.openstackdroid.CloudControllerService" />
     </application>
 
 </manifest>
