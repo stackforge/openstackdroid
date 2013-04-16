@@ -6,16 +6,16 @@ public class ConnectionProfile {
 	private String username;
 	private String password;
 	private String tenantId;
-	private String connectionURL;
+	private String endpoint;
 	
-	public ConnectionProfile(String profileName, String username, String password, String tenantId,
-			String connectionURL) {
+	public ConnectionProfile(String profileName, String endpoint, String username, String password, String tenantId) 
+	{
 		super();
 		this.profileName = profileName;
+		this.endpoint = endpoint;
 		this.username = username;
 		this.password = password;
 		this.tenantId = tenantId;
-		this.connectionURL = connectionURL;
 	}
 
 	public String getProfileName() {
@@ -24,6 +24,15 @@ public class ConnectionProfile {
 
 	public void setProfileName(String profileName) {
 		this.profileName = profileName;
+	}
+
+	
+	public String getEndpoint() {
+		return endpoint;
+	}
+
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
 	}
 
 	public String getUsername() {
@@ -48,14 +57,6 @@ public class ConnectionProfile {
 
 	public void setTenantId(String tenantId) {
 		this.tenantId = tenantId;
-	}
-
-	public String getConnectionURL() {
-		return connectionURL;
-	}
-
-	public void setConnectionURL(String connectionURL) {
-		this.connectionURL = connectionURL;
 	}
 	
 	public String toString() {
