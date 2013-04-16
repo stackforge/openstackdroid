@@ -6,4 +6,9 @@
         android:showAsAction="never"
         android:title="@string/action_settings"/>
 
+    <item
+        android:id="@+id/add"
+        android:showAsAction="always"
+        android:title="Add">
+    </item>
 </menu>
