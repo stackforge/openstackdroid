@@ -30,7 +30,7 @@ public class ConnectionProfileDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
-
+		ConnectionProfileTable.onUpgrade(database, oldVersion, newVersion);
 	}
 
 }
