@@ -26,6 +26,10 @@
             </intent-filter>
         </activity>
         <service android:name="com.rcarrillocruz.android.openstackdroid.CloudControllerService" />
+        <provider
+            android:name="com.rcarrillocruz.android.openstackdroid.ConnectionProfileContentProvider"
+            android:authorities="com.rcarrillocruz.android.openstackdroid" >
+        </provider>
     </application>
 
 </manifest>
