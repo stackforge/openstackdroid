@@ -25,6 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.rcarrillocruz.android.openstackdroid.ConnectionProfileActivity" >
+        </activity>
         <service android:name="com.rcarrillocruz.android.openstackdroid.CloudControllerService" />
         <provider
             android:name="com.rcarrillocruz.android.openstackdroid.ConnectionProfileContentProvider"
