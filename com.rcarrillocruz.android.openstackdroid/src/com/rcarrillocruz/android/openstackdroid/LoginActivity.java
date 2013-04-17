@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.gson.Gson;
@@ -60,6 +61,18 @@ public class LoginActivity extends ListActivity implements Receiver {
         startService(intent);
     }
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// TODO Auto-generated method stub
+		switch(item.getItemId()) {
+		case R.id.add_profile:
+			addConnectionProfile();
+			return true;
+		}
+		
+		return super.onOptionsItemSelected(item);
+	}
+
 
 	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
@@ -68,5 +81,9 @@ public class LoginActivity extends ListActivity implements Receiver {
 			Toast.makeText(this, resultData.getString("results"),Toast.LENGTH_LONG).show();
 		}
 	}
-    
+
+	private void addConnectionProfile() {
+		Intent i = new Intent(this, ConnectionProfileActivity.class);
+		startActivity(i);
+	}
 }
