@@ -2,14 +2,17 @@ package com.rcarrillocruz.android.openstackdroid;
 
 import android.net.Uri;
 import android.os.Handler;
-
 import android.app.ListActivity;
 import android.content.Intent;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 import android.os.Bundle;
+import android.view.ActionMode;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -18,6 +21,9 @@ import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Re
 
 public class LoginActivity extends ListActivity implements Receiver {
 	private CloudControllerResultReceiver mReceiver;
+	protected Object mActionMode;
+	public int selectedItem = -1;
+	
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +34,67 @@ public class LoginActivity extends ListActivity implements Receiver {
         	new ConnectionProfile("devops on Production", "http://192.168.1.20:5000", "devops", "lol", "2")
         };		
         
-        ArrayAdapter<ConnectionProfile> adapter = new ArrayAdapter<ConnectionProfile>(this, android.R.layout.simple_list_item_1, profiles);
+        ArrayAdapter<ConnectionProfile> adapter = new ArrayAdapter<ConnectionProfile>(this, R.layout.profile_list_item, profiles);
         setListAdapter(adapter);
+        
+        final ListView lv = getListView();
+        lv.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        
+        lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+            	if (mActionMode != null) {
+            		return false;
+            	}
+            	selectedItem = position;
+
+            	// Start the CAB using the ActionMode.Callback defined above
+            	mActionMode = LoginActivity.this.startActionMode(mActionModeCallback);
+            	view.setSelected(true);
+            	lv.setItemChecked(position, true);
+            	
+            	return true;
+            }
+        });
         
         mReceiver = new CloudControllerResultReceiver(new Handler());
         mReceiver.setReceiver(this);
     }
 
+    private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
+
+    	// Called when the action mode is created; startActionMode() was called
+    	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+    		// Inflate a menu resource providing context menu items
+    		MenuInflater inflater = mode.getMenuInflater();
+    		// Assumes that you have "contexual.xml" menu resources
+    		inflater.inflate(R.menu.contextual, menu);
+    		return true;
+    	}
+
+    	public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+    		return false; // Return false if nothing is done
+    	}
+
+    	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+    		switch (item.getItemId()) {
+    		case R.id.clone:
+    			mode.finish();
+    			return true;
+    		case R.id.delete:
+    			mode.finish();
+    		default:
+    			return false;
+    		}
+    	}
+
+    	public void onDestroyActionMode(ActionMode mode) {
+    		mActionMode = null;
+    		selectedItem = -1;
+    	}
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,6 +120,8 @@ public class LoginActivity extends ListActivity implements Receiver {
         
         startService(intent);
     }
+    
+    
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
