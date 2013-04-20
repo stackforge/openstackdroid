@@ -18,8 +18,8 @@ public class ConnectionProfileTable {
 		      + COLUMN_ID + " integer primary key autoincrement, " 
 		      + COLUMN_PROFILE_NAME + " text not null, " 
 		      + COLUMN_ENDPOINT + " text not null," 
-		      + COLUMN_USERNAME + " text not null"
-		      + COLUMN_PASSWORD + " text not null"
+		      + COLUMN_USERNAME + " text not null,"
+		      + COLUMN_PASSWORD + " text not null,"
 		      + COLUMN_TENANT_ID + " text not null"
 		      + ");";
 
