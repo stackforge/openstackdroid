@@ -9,4 +9,7 @@
 	<string name="username">Username</string>
 	<string name="password">Password</string>
 	<string name="tenantId">Tenant id</string>
+	<string name="edit">Edit</string>
+	<string name="clone">Clone</string>
+	<string name="delete">Delete</string>
 </resources>
