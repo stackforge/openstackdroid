@@ -80,6 +80,9 @@ public class LoginActivity extends ListActivity implements Receiver {
 
     	public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
     		switch (item.getItemId()) {
+    		case R.id.edit:
+    			mode.finish();
+    			return true;
     		case R.id.clone:
     			mode.finish();
     			return true;
@@ -104,21 +107,23 @@ public class LoginActivity extends ListActivity implements Receiver {
     }
     
     protected void onListItemClick(ListView l, View v, int position, long id) {
-        ConnectionProfile profileClicked = (ConnectionProfile) getListAdapter().getItem(position);
-        
-        Intent intent = new Intent(this, CloudControllerService.class);
-        intent.setData(Uri.parse("http://192.168.1.20:5000"));
-        intent.putExtra(CloudControllerService.OPERATION, CloudControllerService.GET_TOKEN_OPERATION);
-        intent.putExtra(CloudControllerService.RECEIVER, mReceiver);
-        
-        Bundle params = new Bundle();
-        params.putString("username", profileClicked.getUsername());
-        params.putString("password", profileClicked.getPassword());
-        params.putString("tenantId", profileClicked.getTenantId());
-        
-        intent.putExtra(CloudControllerService.PARAMS, params);
-        
-        startService(intent);
+        if(mActionMode == null) {
+        	ConnectionProfile profileClicked = (ConnectionProfile) getListAdapter().getItem(position);
+            
+            Intent intent = new Intent(this, CloudControllerService.class);
+            intent.setData(Uri.parse("http://192.168.1.20:5000"));
+            intent.putExtra(CloudControllerService.OPERATION, CloudControllerService.GET_TOKEN_OPERATION);
+            intent.putExtra(CloudControllerService.RECEIVER, mReceiver);
+            
+            Bundle params = new Bundle();
+            params.putString("username", profileClicked.getUsername());
+            params.putString("password", profileClicked.getPassword());
+            params.putString("tenantId", profileClicked.getTenantId());
+            
+            intent.putExtra(CloudControllerService.PARAMS, params);
+            
+            startService(intent);
+        }      
     }
     
     
