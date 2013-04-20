@@ -50,7 +50,6 @@ public class LoginActivity extends ListActivity implements Receiver {
             	}
             	selectedItem = position;
 
-            	// Start the CAB using the ActionMode.Callback defined above
             	mActionMode = LoginActivity.this.startActionMode(mActionModeCallback);
             	view.setSelected(true);
             	lv.setItemChecked(position, true);
@@ -65,11 +64,8 @@ public class LoginActivity extends ListActivity implements Receiver {
 
     private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
-    	// Called when the action mode is created; startActionMode() was called
     	public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-    		// Inflate a menu resource providing context menu items
     		MenuInflater inflater = mode.getMenuInflater();
-    		// Assumes that you have "contexual.xml" menu resources
     		inflater.inflate(R.menu.contextual, menu);
     		return true;
     	}
@@ -101,7 +97,6 @@ public class LoginActivity extends ListActivity implements Receiver {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
@@ -130,7 +125,6 @@ public class LoginActivity extends ListActivity implements Receiver {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// TODO Auto-generated method stub
 		switch(item.getItemId()) {
 		case R.id.add_profile:
 			addConnectionProfile();
@@ -143,7 +137,6 @@ public class LoginActivity extends ListActivity implements Receiver {
 
 	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			Toast.makeText(this, resultData.getString("results"),Toast.LENGTH_LONG).show();
 		}
