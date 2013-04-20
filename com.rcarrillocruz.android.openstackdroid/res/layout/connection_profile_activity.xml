@@ -8,8 +8,7 @@
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profile_name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/profile_name" />
 
     <EditText
         android:id="@+id/editText1"
@@ -25,23 +24,21 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/endpoint"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/endpoint" />
 
     <EditText
         android:id="@+id/editText2"
         android:layout_width="600dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="http://&lt;Openstack IP>:&lt;port>"
+        android:hint="@string/endpoint_hint"
         android:inputType="textUri" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/username" />
 
     <EditText
         android:id="@+id/editText3"
@@ -54,8 +51,7 @@
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/editText4"
@@ -68,8 +64,7 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/tenantId"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:text="@string/tenantId" />
 
     <EditText
         android:id="@+id/editText5"
