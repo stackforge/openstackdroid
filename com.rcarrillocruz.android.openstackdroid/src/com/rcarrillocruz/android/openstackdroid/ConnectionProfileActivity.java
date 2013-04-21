@@ -2,6 +2,7 @@ package com.rcarrillocruz.android.openstackdroid;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
@@ -29,10 +30,17 @@ public class ConnectionProfileActivity extends Activity {
 		mPassword = (EditText) findViewById(R.id.password_edittext);
 		mTenantId = (EditText) findViewById(R.id.tenant_id_edittext);
 		
-		connectionProfileUri = null;
+		Bundle extras = getIntent().getExtras();
+		
+		if (extras == null) {
+			connectionProfileUri = null;			
+		} else {
+			connectionProfileUri = extras.getParcelable(ConnectionProfileContentProvider.CONTENT_ITEM_TYPE);
+			populateForm(connectionProfileUri);
+		}
 	}
 
-    public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.connection_profile_menu, menu);
         return true;
     }
@@ -62,8 +70,36 @@ public class ConnectionProfileActivity extends Activity {
 		values.put(ConnectionProfileTable.COLUMN_PASSWORD, password);
 		values.put(ConnectionProfileTable.COLUMN_TENANT_ID, tenantId);
 		
-		connectionProfileUri = getContentResolver().insert(ConnectionProfileContentProvider.CONTENT_URI, values);
+		if (connectionProfileUri == null) {
+			connectionProfileUri = getContentResolver().insert(ConnectionProfileContentProvider.CONTENT_URI, values);			
+		} else {
+			getContentResolver().update(connectionProfileUri, values, null, null);
+		}
 		
 		finish();
+	}
+
+    private void populateForm(Uri uri) {
+		// TODO Auto-generated method stub
+    	String[] projection = {ConnectionProfileTable.COLUMN_PROFILE_NAME, ConnectionProfileTable.COLUMN_ENDPOINT, 
+    						   ConnectionProfileTable.COLUMN_USERNAME, ConnectionProfileTable.COLUMN_PASSWORD,
+    						   ConnectionProfileTable.COLUMN_TENANT_ID};
+    	
+    	Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
+    	cursor.moveToFirst();
+    	
+    	String profileName = cursor.getString(cursor.getColumnIndex(ConnectionProfileTable.COLUMN_PROFILE_NAME));
+    	String endpoint = cursor.getString(cursor.getColumnIndex(ConnectionProfileTable.COLUMN_ENDPOINT));
+    	String username = cursor.getString(cursor.getColumnIndex(ConnectionProfileTable.COLUMN_USERNAME));
+    	String password = cursor.getString(cursor.getColumnIndex(ConnectionProfileTable.COLUMN_PASSWORD));
+    	String tenantId = cursor.getString(cursor.getColumnIndex(ConnectionProfileTable.COLUMN_TENANT_ID));
+    	
+    	mProfileName.setText(profileName);
+    	mEndpoint.setText(endpoint);
+    	mUsername.setText(username);
+    	mPassword.setText(password);
+    	mTenantId.setText(tenantId);
+    	
+    	cursor.close();
 	}
 }
