@@ -13,4 +13,5 @@
 	<string name="edit">Edit</string>
 	<string name="clone">Clone</string>
 	<string name="delete">Delete</string>
+	<string name="save">Save</string>
 </resources>
