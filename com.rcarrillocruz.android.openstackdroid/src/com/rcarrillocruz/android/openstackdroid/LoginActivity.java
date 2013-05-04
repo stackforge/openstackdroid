@@ -1,18 +1,20 @@
 package com.rcarrillocruz.android.openstackdroid;
 
+import java.util.Iterator;
+import java.util.List;
+
 import android.net.Uri;
 import android.os.Handler;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 import android.os.Bundle;
-import android.provider.SyncStateContract.Columns;
 import android.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -26,10 +28,15 @@ import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
 
 public class LoginActivity extends ListActivity implements Receiver, LoaderManager.LoaderCallbacks<Cursor> {
+	private static final String COMPUTE_ENDPOINT = "compute";
+	private static final String VOLUME_ENDPOINT = "volume";
+	private static final String IDENTITY_ENDPOINT = "identity";
+	private static final String IMAGE_ENDPOINT = "image";
 	private CloudControllerResultReceiver mReceiver;
 	private SimpleCursorAdapter adapter;
 	protected Object mActionMode;
 	private long selectedItemId = -1;
+	private ProgressDialog progressDialog;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,19 +126,21 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
         	String tenantId = cursor.getString(cursor.getColumnIndex(ConnectionProfileTable.COLUMN_TENANT_ID));
         	cursor.close();
         	
-            Intent intent = new Intent(this, CloudControllerService.class);
-            intent.setData(Uri.parse(endpoint));
-            intent.putExtra(CloudControllerService.OPERATION, CloudControllerService.GET_TOKEN_OPERATION);
-            intent.putExtra(CloudControllerService.RECEIVER, mReceiver);
+            Intent serviceIntent = new Intent(this, CloudControllerService.class);
+            serviceIntent.setData(Uri.parse(endpoint));
+            serviceIntent.putExtra(CloudControllerService.OPERATION, CloudControllerService.GET_TOKEN_OPERATION);
+            serviceIntent.putExtra(CloudControllerService.RECEIVER, mReceiver);
             
             Bundle params = new Bundle();
             params.putString("username", username);
             params.putString("password", password);
             params.putString("tenantId", tenantId);
             
-            intent.putExtra(CloudControllerService.PARAMS, params);
+            serviceIntent.putExtra(CloudControllerService.PARAMS, params);
             
-            startService(intent);
+            startService(serviceIntent);
+            progressDialog = ProgressDialog.show(this, null, "Authenticating...");
+            
         } else {
         	selectedItemId = id;
         }
@@ -153,9 +162,45 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
 
 	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
+		progressDialog.dismiss();
+		
 		if (resultCode == 200) {
-			Toast.makeText(this, resultData.getString("results"),Toast.LENGTH_LONG).show();
+			Gson gson = new Gson();
+			GetTokenResponse gtr = gson.fromJson(resultData.getString("results"), GetTokenResponse.class);
+			
+			OpenstackdroidApplication application = (OpenstackdroidApplication) getApplication();
+			List<ServiceCatalogObject> sc = gtr.getAccess().getServiceCatalog();
+			
+			application.setToken(gtr.getAccess().getToken().getId());
+			application.setComputeEndpoint(getEndpointByType(sc, COMPUTE_ENDPOINT));
+			application.setVolumeEndpoint(getEndpointByType(sc, VOLUME_ENDPOINT));
+			application.setIdentityEndpoint(getEndpointByType(sc, IDENTITY_ENDPOINT));
+			application.setImageEndpoint(getEndpointByType(sc, IMAGE_ENDPOINT));
+			
+            Intent browserIntent = new Intent(this, CloudBrowserActivity.class);
+            startActivity(browserIntent);
 		}
+	}
+
+	private String getEndpointByType(List<ServiceCatalogObject> sc, String type) {
+		// TODO Auto-generated method stub
+		String url = null;
+		boolean found = false;
+		ServiceCatalogObject item = null;
+		
+		Iterator<ServiceCatalogObject> it = sc.iterator();
+		
+		while (it.hasNext() && !found) {
+			item = it.next();
+			
+			if (item.getType().equals(type)) {
+				url = item.getEndpoints().get(0).getPublicURL();
+				found = true;
+			}
+				
+		}
+		
+		return url;
 	}
 
 	private void addConnectionProfile() {
