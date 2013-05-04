@@ -29,9 +29,8 @@ public class GetTokenOperation implements ApiOperation {
 		
 		String username = params.getString("username");
 		String password = params.getString("password");
-		tenantId = params.getString("tenantId");
 		
-		GetTokenRequest request = new GetTokenRequest(new AuthObject(new PasswordCredentialsObject(params.getString("username"), params.getString("password")), params.getString(tenantId)));
+		GetTokenRequest request = new GetTokenRequest(new AuthObject(new PasswordCredentialsObject(params.getString("username"), params.getString("password")), tenantId));
 		
 		StringEntity se = null;
 		try {
