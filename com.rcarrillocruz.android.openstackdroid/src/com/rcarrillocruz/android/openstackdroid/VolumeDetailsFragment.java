@@ -10,12 +10,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class VolumeDetailsFragment extends Fragment {
-
-	public static final String[] VOLUME_DETAILS = {
-		"10G",
-		"2G",
-		"40G"
-	};
+	private ScrollView scroller;
+	private TextView tv;
 	
 	public static VolumeDetailsFragment newInstance(int position) {
 		// TODO Auto-generated method stub
@@ -35,15 +31,38 @@ public class VolumeDetailsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    	
-        ScrollView scroller = new ScrollView(getActivity());
-        TextView text = new TextView(getActivity());
+        scroller = new ScrollView(getActivity());
+        tv = new TextView(getActivity());
         int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 4, getActivity().getResources().getDisplayMetrics());
-        text.setPadding(padding, padding, padding, padding);
-        scroller.addView(text);
-        text.setText(VOLUME_DETAILS[getShownIndex()]);
+        tv.setPadding(padding, padding, padding, padding);
+        scroller.addView(tv); 
+        VolumeModel volume = (((CloudBrowserActivity)getActivity()).getVolumes()).get(getShownIndex());
+        StringBuffer sb = new StringBuffer();
+        sb.append("ID: " + volume.getId() + "\n\n");
         
+        String name = volume.getName();
+        if (name == null)
+        	name = "";
+        sb.append("Name: " + name + "\n\n");
+        
+        String description = volume.getDescription();
+        if (description == null)
+        	description = "";
+        sb.append("Description: " + description + "\n\n");
+        
+        sb.append("Created: " + volume.getCreated_at() + "\n\n");
+        sb.append("Status: " + volume.getStatus() + "\n\n");
+        sb.append("Size: " + volume.getSize() + "G" + "\n\n");
+        
+        String attached = volume.getAttached_to();
+        
+        if (attached == null)
+        	attached = "";
+        
+        sb.append("Attached to: " + attached + "\n\n");
+        
+        tv.setText(sb.toString());
         return scroller; 
     }
 }
