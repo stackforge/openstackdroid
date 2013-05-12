@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.model;
 
 public class TenantModel {
 	private String id;

@@ -1,7 +1,9 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.operations.compute;
 
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpRequestBase;
+
+import com.rcarrillocruz.android.openstackdroid.operations.ApiOperation;
 
 import android.net.Uri;
 import android.os.Bundle;

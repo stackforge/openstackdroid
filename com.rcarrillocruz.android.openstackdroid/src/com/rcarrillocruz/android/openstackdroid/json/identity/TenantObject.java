@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.json.identity;
 
 public class TenantObject {
 	private String id;

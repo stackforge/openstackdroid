@@ -5,6 +5,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.rcarrillocruz.android.openstackdroid.json.volume.GetVolumesResponse;
+import com.rcarrillocruz.android.openstackdroid.json.volume.VolumeDetailsObject;
+import com.rcarrillocruz.android.openstackdroid.model.VolumeModel;
 
 import android.app.FragmentTransaction;
 import android.app.ListFragment;

@@ -1,4 +1,5 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.json.compute;
+
 
 public class ServerDetailsObject {
 	private String id;

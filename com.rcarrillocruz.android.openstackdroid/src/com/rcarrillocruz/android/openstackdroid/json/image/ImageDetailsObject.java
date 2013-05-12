@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.json.image;
 
 public class ImageDetailsObject {
 	private String checksum; 

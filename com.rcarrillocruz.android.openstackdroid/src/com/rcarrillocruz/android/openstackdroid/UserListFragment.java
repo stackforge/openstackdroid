@@ -12,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.rcarrillocruz.android.openstackdroid.json.identity.GetUsersResponse;
+import com.rcarrillocruz.android.openstackdroid.json.identity.UserDetailsObject;
+import com.rcarrillocruz.android.openstackdroid.model.UserModel;
 
 public class UserListFragment extends CloudBrowserListFragment {
 

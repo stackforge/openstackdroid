@@ -2,6 +2,9 @@ package com.rcarrillocruz.android.openstackdroid;
 
 import java.util.Iterator;
 
+import com.rcarrillocruz.android.openstackdroid.model.IPAddressModel;
+import com.rcarrillocruz.android.openstackdroid.model.ServerModel;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;

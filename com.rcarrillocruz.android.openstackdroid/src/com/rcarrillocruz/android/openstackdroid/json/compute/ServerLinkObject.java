@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.json.compute;
 
 public class ServerLinkObject {
 	private String href;

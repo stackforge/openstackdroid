@@ -27,6 +27,10 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
+import com.rcarrillocruz.android.openstackdroid.json.identity.EndpointObject;
+import com.rcarrillocruz.android.openstackdroid.json.identity.GetTokenResponse;
+import com.rcarrillocruz.android.openstackdroid.json.identity.RoleObject;
+import com.rcarrillocruz.android.openstackdroid.json.identity.ServiceCatalogObject;
 
 public class LoginActivity extends ListActivity implements Receiver, LoaderManager.LoaderCallbacks<Cursor> {
 	private static final String COMPUTE_ENDPOINT = "compute";

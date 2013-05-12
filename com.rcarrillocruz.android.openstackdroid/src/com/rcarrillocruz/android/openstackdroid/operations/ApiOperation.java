@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.operations;
 
 import org.apache.http.client.methods.HttpRequestBase;
 

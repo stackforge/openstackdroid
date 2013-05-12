@@ -1,5 +1,7 @@
 package com.rcarrillocruz.android.openstackdroid;
 
+import com.rcarrillocruz.android.openstackdroid.model.TenantModel;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;

@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.json.volume;
 
 public class VolumeAttachmentObject {
 	private String id;

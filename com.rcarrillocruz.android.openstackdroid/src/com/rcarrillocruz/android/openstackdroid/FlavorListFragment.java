@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.gson.Gson;
+import com.rcarrillocruz.android.openstackdroid.json.compute.FlavorDetailsObject;
+import com.rcarrillocruz.android.openstackdroid.json.compute.GetFlavorsResponse;
+import com.rcarrillocruz.android.openstackdroid.model.FlavorModel;
 
 import android.app.FragmentTransaction;
 import android.content.Intent;

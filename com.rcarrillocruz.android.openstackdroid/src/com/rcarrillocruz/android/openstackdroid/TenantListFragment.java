@@ -12,6 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
+import com.rcarrillocruz.android.openstackdroid.json.identity.GetTenantsResponse;
+import com.rcarrillocruz.android.openstackdroid.json.identity.TenantDetailsObject;
+import com.rcarrillocruz.android.openstackdroid.model.TenantModel;
 
 public class TenantListFragment extends CloudBrowserListFragment {
 

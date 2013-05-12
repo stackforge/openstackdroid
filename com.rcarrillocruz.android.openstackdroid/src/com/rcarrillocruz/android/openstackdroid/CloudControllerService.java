@@ -22,6 +22,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
+import com.rcarrillocruz.android.openstackdroid.operations.ApiOperation;
+
 import android.app.IntentService;
 import android.content.Intent;
 import android.net.Uri;
@@ -32,13 +34,13 @@ import android.widget.Toast;
 
 public class CloudControllerService extends IntentService {
 	public static final String TAG = CloudControllerResultReceiver.class.getName();
-	public static final String GET_TOKEN_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetTokenOperation";
-	public static final String GET_SERVERS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetServersOperation";
-	public static final String GET_VOLUMES_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetVolumesOperation";
-	public static final String GET_IMAGES_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetImagesOperation";
-	public static final String GET_FLAVORS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetFlavorsOperation";
-	public static final String GET_USERS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetUsersOperation";
-	public static final String GET_TENANTS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetTenantsOperation";
+	public static final String GET_TOKEN_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.identity.GetTokenOperation";
+	public static final String GET_SERVERS_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.compute.GetServersOperation";
+	public static final String GET_VOLUMES_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.volume.GetVolumesOperation";
+	public static final String GET_IMAGES_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.image.GetImagesOperation";
+	public static final String GET_FLAVORS_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.compute.GetFlavorsOperation";
+	public static final String GET_USERS_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.identity.GetUsersOperation";
+	public static final String GET_TENANTS_OPERATION = "com.rcarrillocruz.android.openstackdroid.operations.identity.GetTenantsOperation";
 	
 	public static final String OPERATION = "com.rcarrillocruz.android.openstackdroid.OPERATION";
 	public static final String TOKEN = "com.rcarrillocruz.android.openstackdroid.TOKEN";

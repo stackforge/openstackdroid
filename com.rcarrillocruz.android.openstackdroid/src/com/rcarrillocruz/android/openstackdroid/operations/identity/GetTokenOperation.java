@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.operations.identity;
 
 import java.io.UnsupportedEncodingException;
 
@@ -10,6 +10,10 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.gson.Gson;
+import com.rcarrillocruz.android.openstackdroid.json.identity.AuthObject;
+import com.rcarrillocruz.android.openstackdroid.json.identity.GetTokenRequest;
+import com.rcarrillocruz.android.openstackdroid.json.identity.PasswordCredentialsObject;
+import com.rcarrillocruz.android.openstackdroid.operations.ApiOperation;
 
 public class GetTokenOperation implements ApiOperation {
 	private Gson gson;

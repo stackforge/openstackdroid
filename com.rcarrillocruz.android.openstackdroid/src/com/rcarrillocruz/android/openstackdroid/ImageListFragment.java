@@ -15,6 +15,9 @@ import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
+import com.rcarrillocruz.android.openstackdroid.json.image.GetImagesResponse;
+import com.rcarrillocruz.android.openstackdroid.json.image.ImageDetailsObject;
+import com.rcarrillocruz.android.openstackdroid.model.ImageModel;
 
 public class ImageListFragment extends CloudBrowserListFragment {
 	List<ImageModel> images;

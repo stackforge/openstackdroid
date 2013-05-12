@@ -6,6 +6,11 @@ import java.util.List;
 
 import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
+import com.rcarrillocruz.android.openstackdroid.json.compute.GetServersResponse;
+import com.rcarrillocruz.android.openstackdroid.json.compute.IPAddressObject;
+import com.rcarrillocruz.android.openstackdroid.json.compute.ServerDetailsObject;
+import com.rcarrillocruz.android.openstackdroid.model.IPAddressModel;
+import com.rcarrillocruz.android.openstackdroid.model.ServerModel;
 
 import android.app.FragmentTransaction;
 import android.app.ListFragment;
