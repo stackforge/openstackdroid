@@ -33,11 +33,20 @@ import android.widget.Toast;
 public class CloudControllerService extends IntentService {
 	public static final String TAG = CloudControllerResultReceiver.class.getName();
 	public static final String GET_TOKEN_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetTokenOperation";
+	public static final String GET_SERVERS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetServersOperation";
+	public static final String GET_VOLUMES_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetVolumesOperation";
+	public static final String GET_IMAGES_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetImagesOperation";
+	public static final String GET_FLAVORS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetFlavorsOperation";
+	public static final String GET_USERS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetUsersOperation";
+	public static final String GET_TENANTS_OPERATION = "com.rcarrillocruz.android.openstackdroid.GetTenantsOperation";
 	
 	public static final String OPERATION = "com.rcarrillocruz.android.openstackdroid.OPERATION";
+	public static final String TOKEN = "com.rcarrillocruz.android.openstackdroid.TOKEN";
+	public static final String TENANT = "com.rcarrillocruz.android.openstackdroid.TENANT";
 	public static final String PARAMS = "com.rcarrillocruz.android.openstackdroid.PARAMS";
 	public static final String RECEIVER = "com.rcarrillocruz.android.openstackdroid.RECEIVER";
-
+	public static final String OPERATION_RESULTS = "com.rcarrillocruz.android.openstackdroid.RESULTS";
+	
 	public CloudControllerService() {				
 		super("CloudControllerService");
 		// TODO Auto-generated constructor stub
@@ -50,12 +59,11 @@ public class CloudControllerService extends IntentService {
 		Bundle extras = intent.getExtras();
 		
 		String operation = extras.getString(OPERATION);
+		String token = extras.getString(TOKEN);
+		String tenantId = extras.getString(TENANT);
 		ResultReceiver receiver = extras.getParcelable(RECEIVER);
 		Bundle params = extras.getParcelable(PARAMS);
 
-		String tenantId = params.getString("tenantId");
-		String token = null;
-		
 		ApiOperation apiOperation = getOperationInstance(operation);
 
 		HttpRequestBase request = apiOperation.invoke(data, token, tenantId, params);
@@ -63,7 +71,7 @@ public class CloudControllerService extends IntentService {
 		HttpResponse response = null;
 		response = executeOperation(request);
 		//android.os.Debug.waitForDebugger();
-		returnResultstoReceiver(response, receiver);
+		returnResultstoReceiver(operation, response, receiver);
 	}
 
 	private ApiOperation getOperationInstance(String operation) {
@@ -103,13 +111,20 @@ public class CloudControllerService extends IntentService {
 		return response;
 	}
 
-	private void returnResultstoReceiver(HttpResponse response,
+	private void returnResultstoReceiver(String operation, HttpResponse response,
 			ResultReceiver receiver) {
 		// TODO Auto-generated method stub
 		Bundle results = new Bundle();
-
+		
 		try {
-			results.putString("results", EntityUtils.toString(response.getEntity()));
+			results.putString(OPERATION, operation);
+			if (response != null) {
+				results.putString(OPERATION_RESULTS, EntityUtils.toString(response.getEntity()));
+				receiver.send(response.getStatusLine().getStatusCode(), results);
+			} else {
+				results.putString(OPERATION_RESULTS, "Connection to Openstack could not be established!");
+				receiver.send(504, results);
+			}
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -117,11 +132,9 @@ public class CloudControllerService extends IntentService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		receiver.send(response.getStatusLine().getStatusCode(), results);
 	}
 	
-	private static List<BasicNameValuePair> paramsToList(Bundle params) {
+/*	private static List<BasicNameValuePair> paramsToList(Bundle params) {
         ArrayList<BasicNameValuePair> formList = new ArrayList<BasicNameValuePair>(params.size());
         
         for (String key : params.keySet()) {
@@ -130,5 +143,5 @@ public class CloudControllerService extends IntentService {
         }
         
         return formList;
-    }
+    }*/
 }

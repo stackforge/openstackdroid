@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.net.Uri;
 import android.os.Handler;
+import android.os.Parcelable;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -129,12 +130,13 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
             Intent serviceIntent = new Intent(this, CloudControllerService.class);
             serviceIntent.setData(Uri.parse(endpoint));
             serviceIntent.putExtra(CloudControllerService.OPERATION, CloudControllerService.GET_TOKEN_OPERATION);
+            serviceIntent.putExtra(CloudControllerService.TOKEN, (String)null);
+            serviceIntent.putExtra(CloudControllerService.TENANT, tenantId);
             serviceIntent.putExtra(CloudControllerService.RECEIVER, mReceiver);
             
             Bundle params = new Bundle();
             params.putString("username", username);
             params.putString("password", password);
-            params.putString("tenantId", tenantId);
             
             serviceIntent.putExtra(CloudControllerService.PARAMS, params);
             
@@ -166,25 +168,39 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
 		
 		if (resultCode == 200) {
 			Gson gson = new Gson();
-			GetTokenResponse gtr = gson.fromJson(resultData.getString("results"), GetTokenResponse.class);
-			
+			GetTokenResponse gtr = gson.fromJson(resultData.getString(CloudControllerService.OPERATION_RESULTS), GetTokenResponse.class);
 			OpenstackdroidApplication application = (OpenstackdroidApplication) getApplication();
 			List<ServiceCatalogObject> sc = gtr.getAccess().getServiceCatalog();
 			
+			application.setAdminUser(false);
+			Iterator<RoleObject> it = gtr.getAccess().getUser().getRoles().iterator();
+			
+			while (it.hasNext()) {
+				if (it.next().getName().equals("admin"))
+					application.setAdminUser(true);
+			}
+			
 			application.setToken(gtr.getAccess().getToken().getId());
-			application.setComputeEndpoint(getEndpointByType(sc, COMPUTE_ENDPOINT));
-			application.setVolumeEndpoint(getEndpointByType(sc, VOLUME_ENDPOINT));
-			application.setIdentityEndpoint(getEndpointByType(sc, IDENTITY_ENDPOINT));
-			application.setImageEndpoint(getEndpointByType(sc, IMAGE_ENDPOINT));
+			application.setTenantId(gtr.getAccess().getToken().getTenant().getId());
+			application.setComputeEndpoint(getEndpointByType(sc, COMPUTE_ENDPOINT).getPublicURL());
+			application.setVolumeEndpoint(getEndpointByType(sc, VOLUME_ENDPOINT).getPublicURL());
+			
+			EndpointObject ieo = getEndpointByType(sc, IDENTITY_ENDPOINT);
+			application.setIdentityEndpoint(ieo.getPublicURL());
+			application.setIdentityAdminEndpoint(ieo.getAdminURL());
+			
+			application.setImageEndpoint(getEndpointByType(sc, IMAGE_ENDPOINT).getPublicURL());
 			
             Intent browserIntent = new Intent(this, CloudBrowserActivity.class);
             startActivity(browserIntent);
+		} else {
+			Toast.makeText(this, "Error " + resultCode + ": " + resultData.getString(CloudControllerService.OPERATION_RESULTS) , Toast.LENGTH_LONG).show();
 		}
 	}
 
-	private String getEndpointByType(List<ServiceCatalogObject> sc, String type) {
+	private EndpointObject getEndpointByType(List<ServiceCatalogObject> sc, String type) {
 		// TODO Auto-generated method stub
-		String url = null;
+		EndpointObject eo = null;
 		boolean found = false;
 		ServiceCatalogObject item = null;
 		
@@ -194,13 +210,13 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
 			item = it.next();
 			
 			if (item.getType().equals(type)) {
-				url = item.getEndpoints().get(0).getPublicURL();
+				eo = item.getEndpoints().get(0);
 				found = true;
 			}
 				
 		}
 		
-		return url;
+		return eo;
 	}
 
 	private void addConnectionProfile() {
