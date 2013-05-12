@@ -1,5 +1,7 @@
 package com.rcarrillocruz.android.openstackdroid;
 
+import java.util.Iterator;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.TypedValue;
@@ -10,12 +12,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 public class ServerDetailsFragment extends Fragment {
-
-	public static final String[] SERVER_DETAILS = {
-		"LOLSERVER1",
-		"SADASD",
-		"ERWER"
-	};
+	private ScrollView scroller;
+	private TextView tv;
 	
 	public static ServerDetailsFragment newInstance(int position) {
 		// TODO Auto-generated method stub
@@ -36,14 +34,38 @@ public class ServerDetailsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	
-        ScrollView scroller = new ScrollView(getActivity());
-        TextView text = new TextView(getActivity());
+        scroller = new ScrollView(getActivity());
+        tv = new TextView(getActivity());
         int padding = (int)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 4, getActivity().getResources().getDisplayMetrics());
-        text.setPadding(padding, padding, padding, padding);
-        scroller.addView(text);
-        text.setText(SERVER_DETAILS[getShownIndex()]);
+        tv.setPadding(padding, padding, padding, padding);
+        scroller.addView(tv); 
+        ServerModel server = (((CloudBrowserActivity)getActivity()).getServers()).get(getShownIndex());
+        StringBuffer sb = new StringBuffer();
+        sb.append("ID: " + server.getId() + "\n\n");
+        sb.append("Name: " + server.getName() + "\n\n");
+        sb.append("Created: " + server.getCreated() + "\n\n");
+        sb.append("Updated: " + server.getUpdated() + "\n\n");
+        sb.append("Status: " + server.getStatus() + "\n\n");
+        sb.append("Image: " + server.getImage() + "\n\n");
+        sb.append("Flavor: " + server.getFlavor() + "\n\n");
+        sb.append("Private IP addresses:\n\n");
         
+        Iterator<IPAddressModel> it = (Iterator<IPAddressModel>) server.getPrivateAddresses().iterator();
+        
+        while (it.hasNext()) {
+        	sb.append(it.next().getAddr().toString() + "\n");
+        }
+
+        sb.append("\nPublic IP addresses: \n\n");
+        it = (Iterator<IPAddressModel>) server.getPublicAddresses().iterator();
+        
+        while (it.hasNext()) {
+        	sb.append(it.next().getAddr().toString() + "\n");
+        }
+        
+        tv.setText(sb.toString());
         return scroller; 
     }
+
 }
