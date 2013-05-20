@@ -72,7 +72,7 @@ public class CloudControllerService extends IntentService {
 
 		HttpResponse response = null;
 		response = executeOperation(request);
-		//android.os.Debug.waitForDebugger();
+		
 		returnResultstoReceiver(operation, response, receiver);
 	}
 
@@ -135,15 +135,4 @@ public class CloudControllerService extends IntentService {
 			e.printStackTrace();
 		}
 	}
-	
-/*	private static List<BasicNameValuePair> paramsToList(Bundle params) {
-        ArrayList<BasicNameValuePair> formList = new ArrayList<BasicNameValuePair>(params.size());
-        
-        for (String key : params.keySet()) {
-            Object value = params.get(key);
-            formList.add(new BasicNameValuePair(key, value.toString()));
-        }
-        
-        return formList;
-    }*/
 }
