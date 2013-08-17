@@ -1,0 +1,4 @@
+openstackdroid
+==============
+
+Openstack Android client
