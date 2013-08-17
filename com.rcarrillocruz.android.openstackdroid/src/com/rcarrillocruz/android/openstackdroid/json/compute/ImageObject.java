@@ -8,7 +8,6 @@ public class ImageObject {
 	
 	public ImageObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

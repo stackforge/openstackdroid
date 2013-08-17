@@ -6,7 +6,6 @@ public class ImageLinkObject {
 	
 	public ImageLinkObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getHref() {

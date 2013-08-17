@@ -10,7 +10,6 @@ public class ServiceCatalogObject {
 	
 	public ServiceCatalogObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<EndpointObject> getEndpoints() {

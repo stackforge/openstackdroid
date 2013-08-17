@@ -7,7 +7,6 @@ public class MetadataObject {
 	private List<String> roles;
 	
 	public MetadataObject() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public int getIs_admin() {

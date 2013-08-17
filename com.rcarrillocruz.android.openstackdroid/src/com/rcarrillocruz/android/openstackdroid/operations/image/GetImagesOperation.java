@@ -10,10 +10,8 @@ import android.os.Bundle;
 
 public class GetImagesOperation implements ApiOperation {
 	private static final String urlTail = "/v2/images";
-	@Override
 	public HttpRequestBase invoke(Uri endpoint, String token, String tenantId,
 			Bundle params) {
-		// TODO Auto-generated method stub
 		HttpGet httpGet = new HttpGet(endpoint.toString()+urlTail);
 		httpGet.setHeader("X-Auth-Token", token);
 		

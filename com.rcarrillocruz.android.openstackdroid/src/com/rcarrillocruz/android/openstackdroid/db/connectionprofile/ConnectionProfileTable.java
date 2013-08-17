@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.db.connectionprofile;
 
 import android.database.sqlite.SQLiteDatabase;
 

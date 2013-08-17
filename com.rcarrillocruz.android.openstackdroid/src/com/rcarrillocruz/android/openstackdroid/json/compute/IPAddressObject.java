@@ -6,7 +6,6 @@ public class IPAddressObject {
 	
 	public IPAddressObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getAddr() {

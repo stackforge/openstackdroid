@@ -9,7 +9,6 @@ public class UserDetailsObject {
 	
 	public UserDetailsObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

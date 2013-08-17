@@ -14,7 +14,6 @@ public class ImageModel {
 	
 	public ImageModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ImageModel(String id, String name, String status, String visibility,

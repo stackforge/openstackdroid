@@ -4,17 +4,14 @@ import java.util.Iterator;
 import java.util.List;
 
 import android.app.FragmentTransaction;
-import android.app.ListFragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
-import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
 import com.rcarrillocruz.android.openstackdroid.json.image.GetImagesResponse;
 import com.rcarrillocruz.android.openstackdroid.json.image.ImageDetailsObject;
 import com.rcarrillocruz.android.openstackdroid.model.ImageModel;
@@ -23,10 +20,8 @@ public class ImageListFragment extends CloudBrowserListFragment {
 	List<ImageModel> images;
 	private ArrayAdapter<ImageModel> adapter;
     
-    @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-    	super.onActivityCreated(savedInstanceState);
+		super.onActivityCreated(savedInstanceState);
     	endpoint = ((OpenstackdroidApplication) (getActivity().getApplication())).getImageEndpoint();
 		images = ((CloudBrowserActivity) getActivity()).getImages();
 		
@@ -47,17 +42,14 @@ public class ImageListFragment extends CloudBrowserListFragment {
 
 	}
 
-	@Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-    	// TODO Auto-generated method stub
-		mCurCheckPosition = position;
+	public void onListItemClick(ListView l, View v, int position, long id) {
+    	mCurCheckPosition = position;
 		getListView().setItemChecked(position, true);
 		
 		showDetails(position);      
     }
 
 	protected void showDetails(int position) {
-		// TODO Auto-generated method stub
 		ImageDetailsFragment idf = (ImageDetailsFragment) ((CloudBrowserActivity) getActivity()).getmImageDetailsFragment();
 		
 		if (idf == null || idf.getShownIndex() != position) 
@@ -70,9 +62,7 @@ public class ImageListFragment extends CloudBrowserListFragment {
 	    ((CloudBrowserActivity) getActivity()).showDetailsLayout();
 	}
 
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			String operation = resultData.getString(CloudControllerService.OPERATION);
 			
@@ -86,7 +76,6 @@ public class ImageListFragment extends CloudBrowserListFragment {
 	}
     
 	private void populateItems(GetImagesResponse gir) {
-		// TODO Auto-generated method stub
 		images.clear();
 		Iterator<ImageDetailsObject> it = gir.getImages().iterator();
 		ImageDetailsObject item = null;

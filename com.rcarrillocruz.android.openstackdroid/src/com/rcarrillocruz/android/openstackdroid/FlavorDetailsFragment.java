@@ -16,7 +16,6 @@ public class FlavorDetailsFragment extends Fragment {
 	private TextView tv;
 	
 	public static FlavorDetailsFragment newInstance(int position) {
-		// TODO Auto-generated method stub
 		FlavorDetailsFragment f = new FlavorDetailsFragment();
 		
 		Bundle args = new Bundle();
@@ -27,7 +26,6 @@ public class FlavorDetailsFragment extends Fragment {
     }
 	
 	public int getShownIndex() {
-		// TODO Auto-generated method stub
 		return getArguments().getInt("position", 0);
 	}
 	

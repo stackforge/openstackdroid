@@ -7,7 +7,6 @@ public class GetVolumesResponse {
 	
 	public GetVolumesResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public List<VolumeDetailsObject> getVolumes() {

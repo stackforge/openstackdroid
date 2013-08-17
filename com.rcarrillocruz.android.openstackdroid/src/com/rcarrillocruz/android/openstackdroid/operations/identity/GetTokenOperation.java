@@ -8,6 +8,7 @@ import org.apache.http.entity.StringEntity;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.json.identity.AuthObject;
@@ -18,16 +19,15 @@ import com.rcarrillocruz.android.openstackdroid.operations.ApiOperation;
 public class GetTokenOperation implements ApiOperation {
 	private Gson gson;
 	private static final String urlTail = "/v2.0/tokens";
+	private static final String TAG = "com.rcarrillocruz.android.openstackdroid.operations.identity.GetTokenOperation";
 	
 	public GetTokenOperation() {
 		super();	
 		gson = new Gson();
 	}
 	
-	@Override
 	public HttpRequestBase invoke(Uri endpoint, String token, String tenantId,
 			Bundle params) {
-		// TODO Auto-generated method stub
 		HttpPost httpPost = new HttpPost(endpoint.toString()+urlTail);
 		httpPost.setHeader("Content-type", "application/json");
 		
@@ -40,8 +40,7 @@ public class GetTokenOperation implements ApiOperation {
 		try {
 			se = new StringEntity(gson.toJson(request));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
 		}
 		
 		httpPost.setEntity(se);

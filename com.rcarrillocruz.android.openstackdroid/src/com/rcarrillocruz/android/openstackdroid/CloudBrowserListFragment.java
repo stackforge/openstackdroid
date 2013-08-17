@@ -17,9 +17,8 @@ public abstract class CloudBrowserListFragment extends ListFragment implements R
         mReceiver.setReceiver(this);
 	}
 	
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
+
 	}
 
 	public String getEndpoint() {

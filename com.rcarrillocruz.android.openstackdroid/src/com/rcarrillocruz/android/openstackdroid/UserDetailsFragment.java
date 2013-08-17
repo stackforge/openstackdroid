@@ -16,7 +16,6 @@ public class UserDetailsFragment extends Fragment {
 	private TextView tv;
 	
 	public static UserDetailsFragment newInstance(int position) {
-		// TODO Auto-generated method stub
 		UserDetailsFragment f = new UserDetailsFragment();
 		
 		Bundle args = new Bundle();
@@ -27,11 +26,9 @@ public class UserDetailsFragment extends Fragment {
 	}
 
 	public int getShownIndex() {
-		// TODO Auto-generated method stub
 		return getArguments().getInt("position", 0);
 	}
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         scroller = new ScrollView(getActivity());
         tv = new TextView(getActivity());

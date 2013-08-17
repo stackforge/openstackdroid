@@ -9,7 +9,6 @@ public class CloudControllerResultReceiver extends ResultReceiver {
 	
 	public CloudControllerResultReceiver(Handler handler) {
 		super(handler);
-		// TODO Auto-generated constructor stub
 	}
 
 	public interface Receiver {
@@ -20,7 +19,6 @@ public class CloudControllerResultReceiver extends ResultReceiver {
         mReceiver = receiver;
     }
  
-    @Override
     protected void onReceiveResult(int resultCode, Bundle resultData) {
  
         if (mReceiver != null) {

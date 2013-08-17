@@ -7,7 +7,6 @@ public class GetTenantsResponse {
 
 	public GetTenantsResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<TenantDetailsObject> getTenants() {

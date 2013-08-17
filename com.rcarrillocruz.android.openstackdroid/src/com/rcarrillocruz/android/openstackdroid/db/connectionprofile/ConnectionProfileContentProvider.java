@@ -1,4 +1,4 @@
-package com.rcarrillocruz.android.openstackdroid;
+package com.rcarrillocruz.android.openstackdroid.db.connectionprofile;
 
 import android.content.ContentProvider;
 import android.content.ContentResolver;
@@ -28,9 +28,7 @@ public class ConnectionProfileContentProvider extends ContentProvider {
 		sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", CONNECTION_PROFILE_ID);
 	}
 	
-	@Override
 	public int delete(Uri uri, String selection, String[] selectionArgs) {
-		// TODO Auto-generated method stub
 	    int uriType = sURIMatcher.match(uri);
 	    SQLiteDatabase sqlDB = database.getWritableDatabase();
 	    int rowsDeleted = 0;
@@ -59,15 +57,11 @@ public class ConnectionProfileContentProvider extends ContentProvider {
 	    return rowsDeleted;
 	}
 
-	@Override
 	public String getType(Uri uri) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public Uri insert(Uri uri, ContentValues values) {
-		// TODO Auto-generated method stub
 		int uriType = sURIMatcher.match(uri);
 	    SQLiteDatabase sqlDB = database.getWritableDatabase();
 	    long id = 0;
@@ -85,16 +79,12 @@ public class ConnectionProfileContentProvider extends ContentProvider {
 	    return Uri.parse(BASE_PATH + "/" + id);
 	}
 
-	@Override
 	public boolean onCreate() {
-		// TODO Auto-generated method stub
 		database = new ConnectionProfileDatabaseHelper(getContext());
 		return false;
 	}
 
-	@Override
 	public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
-		// TODO Auto-generated method stub
 	    SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 	    queryBuilder.setTables(ConnectionProfileTable.TABLE_CONNECTION_PROFILE);
 	    int uriType = sURIMatcher.match(uri);
@@ -116,9 +106,7 @@ public class ConnectionProfileContentProvider extends ContentProvider {
 	    return cursor;
 	}
 
-	@Override
 	public int update(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
-		// TODO Auto-generated method stub
 	    int uriType = sURIMatcher.match(uri);
 	    SQLiteDatabase sqlDB = database.getWritableDatabase();
 	    int rowsUpdated = 0;

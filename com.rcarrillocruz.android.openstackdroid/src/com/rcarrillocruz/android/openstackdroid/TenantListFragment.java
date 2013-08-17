@@ -22,7 +22,6 @@ public class TenantListFragment extends CloudBrowserListFragment {
 	private ArrayAdapter<TenantModel> adapter;
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		tenants = ((CloudBrowserActivity) getActivity()).getTenants();
         endpoint = ((OpenstackdroidApplication) (getActivity().getApplication())).getIdentityAdminEndpoint();
@@ -44,9 +43,7 @@ public class TenantListFragment extends CloudBrowserListFragment {
 
 	}
 	
-	@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-    	// TODO Auto-generated method stub
 		mCurCheckPosition = position;
 		getListView().setItemChecked(position, true);
 		
@@ -54,7 +51,6 @@ public class TenantListFragment extends CloudBrowserListFragment {
     }
 
 	protected void showDetails(int position) {
-		// TODO Auto-generated method stub
 		TenantDetailsFragment tdf = (TenantDetailsFragment) ((CloudBrowserActivity) getActivity()).getmTenantDetailsFragment();
 		
 		if (tdf == null || tdf.getShownIndex() != position) 
@@ -67,9 +63,7 @@ public class TenantListFragment extends CloudBrowserListFragment {
 	    ((CloudBrowserActivity) getActivity()).showDetailsLayout();
 	}
 
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			String operation = resultData.getString(CloudControllerService.OPERATION);
 			
@@ -83,7 +77,6 @@ public class TenantListFragment extends CloudBrowserListFragment {
 	}
     
 	private void populateItems(GetTenantsResponse gtr) {
-		// TODO Auto-generated method stub
 		tenants.clear();
 		Iterator<TenantDetailsObject> it = gtr.getTenants().iterator();
 		TenantDetailsObject item = null;

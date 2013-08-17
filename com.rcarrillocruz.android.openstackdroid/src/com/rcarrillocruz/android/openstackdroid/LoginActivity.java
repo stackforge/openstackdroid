@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.net.Uri;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -27,6 +26,8 @@ import android.app.LoaderManager;
 import android.content.CursorLoader;
 import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
+import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileContentProvider;
+import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileTable;
 import com.rcarrillocruz.android.openstackdroid.json.identity.EndpointObject;
 import com.rcarrillocruz.android.openstackdroid.json.identity.GetTokenResponse;
 import com.rcarrillocruz.android.openstackdroid.json.identity.RoleObject;
@@ -43,7 +44,6 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
 	private long selectedItemId = -1;
 	private ProgressDialog progressDialog;
 	
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
               
@@ -52,7 +52,6 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
         
         lv.setOnItemLongClickListener(new OnItemLongClickListener() {
 
-            @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
             	if (mActionMode != null) {
@@ -110,7 +109,6 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
     	}
     };
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.login_menu, menu);
         return true;
@@ -153,8 +151,6 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
     }
     
     
-
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 		case R.id.add_profile:
@@ -203,7 +199,6 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
 	}
 
 	private EndpointObject getEndpointByType(List<ServiceCatalogObject> sc, String type) {
-		// TODO Auto-generated method stub
 		EndpointObject eo = null;
 		boolean found = false;
 		ServiceCatalogObject item = null;
@@ -278,20 +273,17 @@ public class LoginActivity extends ListActivity implements Receiver, LoaderManag
 
 	    setListAdapter(adapter);
 	}
-	@Override
+
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-		// TODO Auto-generated method stub
 		String[] projection = { ConnectionProfileTable.COLUMN_ID, ConnectionProfileTable.COLUMN_PROFILE_NAME };
 	    CursorLoader cursorLoader = new CursorLoader(this, ConnectionProfileContentProvider.CONTENT_URI, projection, null, null, null);
 	    return cursorLoader;
 	}
 
-	@Override
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 		adapter.swapCursor(data);
 	}
 
-	@Override
 	public void onLoaderReset(Loader<Cursor> loader) {
 		adapter.swapCursor(null);
 	}

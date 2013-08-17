@@ -16,7 +16,6 @@ public class ImageDetailsFragment extends Fragment {
 	private TextView tv;
 	
 	public static ImageDetailsFragment newInstance(int position) {
-		// TODO Auto-generated method stub
 		ImageDetailsFragment f = new ImageDetailsFragment();
 		
 		Bundle args = new Bundle();
@@ -27,7 +26,6 @@ public class ImageDetailsFragment extends Fragment {
     }
 	
 	public int getShownIndex() {
-		// TODO Auto-generated method stub
 		return getArguments().getInt("position", 0);
 	}
 	

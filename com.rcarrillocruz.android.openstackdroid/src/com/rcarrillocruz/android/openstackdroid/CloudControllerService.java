@@ -1,28 +1,14 @@
 package com.rcarrillocruz.android.openstackdroid;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.ParseException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
-import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-
-import com.rcarrillocruz.android.openstackdroid.operations.ApiOperation;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -31,6 +17,8 @@ import android.os.Bundle;
 import android.os.ResultReceiver;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.rcarrillocruz.android.openstackdroid.operations.ApiOperation;
 
 public class CloudControllerService extends IntentService {
 	public static final String TAG = CloudControllerResultReceiver.class.getName();
@@ -51,12 +39,9 @@ public class CloudControllerService extends IntentService {
 	
 	public CloudControllerService() {				
 		super("CloudControllerService");
-		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	protected void onHandleIntent(Intent intent) {
-		// TODO Auto-generated method stub
 		Uri data = intent.getData();
 		Bundle extras = intent.getExtras();
 		
@@ -77,45 +62,42 @@ public class CloudControllerService extends IntentService {
 	}
 
 	private ApiOperation getOperationInstance(String operation) {
-		// TODO Auto-generated method stub
 		ApiOperation apiOperation = null;
 		
 		try {
 			apiOperation = (ApiOperation) Class.forName(operation).newInstance();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
+			Toast.makeText(getApplicationContext(), "Instantiation exception, check the Android log!", Toast.LENGTH_LONG).show();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
+			Toast.makeText(getApplicationContext(), "Illegal access exception, check the Android log!", Toast.LENGTH_LONG).show();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
+			Toast.makeText(getApplicationContext(), "Class not found exception, check the Android log!", Toast.LENGTH_LONG).show();
 		}
 		
 		return apiOperation;
 	}
 
 	private HttpResponse executeOperation(HttpRequestBase request) {
-		// TODO Auto-generated method stub
 		HttpResponse response = null;
 		HttpClient client = new DefaultHttpClient();
 		
 		try {
 			response = client.execute(request);
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
+			Toast.makeText(getApplicationContext(), "Client protocol exception, check the Android log!", Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
+			Toast.makeText(getApplicationContext(), "Input/output exception, check the Android log!", Toast.LENGTH_LONG).show();
 		}
 		return response;
 	}
 
 	private void returnResultstoReceiver(String operation, HttpResponse response,
 			ResultReceiver receiver) {
-		// TODO Auto-generated method stub
 		Bundle results = new Bundle();
 		
 		try {
@@ -128,11 +110,11 @@ public class CloudControllerService extends IntentService {
 				receiver.send(504, results);
 			}
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e));
+			Toast.makeText(getApplicationContext(), "Parsing exception, check the Android log!", Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Log.e(TAG,Log.getStackTraceString(e)); 
+			Toast.makeText(getApplicationContext(), "Input/output exception, check the Android log!", Toast.LENGTH_LONG).show();
 		}
 	}
 }

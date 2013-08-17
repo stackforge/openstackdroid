@@ -1,34 +1,26 @@
 package com.rcarrillocruz.android.openstackdroid;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.google.gson.Gson;
 import com.rcarrillocruz.android.openstackdroid.json.volume.GetVolumesResponse;
 import com.rcarrillocruz.android.openstackdroid.json.volume.VolumeDetailsObject;
 import com.rcarrillocruz.android.openstackdroid.model.VolumeModel;
 
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.LinearLayout.LayoutParams;
-
 public class VolumeListFragment extends CloudBrowserListFragment {
 	List<VolumeModel> volumes;
 	private ArrayAdapter<VolumeModel> adapter;
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		volumes = ((CloudBrowserActivity) getActivity()).getVolumes();
         endpoint = ((OpenstackdroidApplication) (getActivity().getApplication())).getVolumeEndpoint();
@@ -50,9 +42,7 @@ public class VolumeListFragment extends CloudBrowserListFragment {
 
 	}
 	
-	@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-    	// TODO Auto-generated method stub
 		mCurCheckPosition = position;
 		getListView().setItemChecked(position, true);
 		
@@ -60,7 +50,6 @@ public class VolumeListFragment extends CloudBrowserListFragment {
     }
 
 	protected void showDetails(int position) {
-		// TODO Auto-generated method stub
 		VolumeDetailsFragment sdf = (VolumeDetailsFragment) ((CloudBrowserActivity) getActivity()).getmVolumeDetailsFragment();
 		
 		if (sdf == null || sdf.getShownIndex() != position) 
@@ -73,9 +62,7 @@ public class VolumeListFragment extends CloudBrowserListFragment {
 	    ((CloudBrowserActivity) getActivity()).showDetailsLayout();
 	}
 
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			String operation = resultData.getString(CloudControllerService.OPERATION);
 			
@@ -89,7 +76,6 @@ public class VolumeListFragment extends CloudBrowserListFragment {
 	}
     
 	private void populateItems(GetVolumesResponse gsr) {
-		// TODO Auto-generated method stub
 		volumes.clear();
 		Iterator<VolumeDetailsObject> it = gsr.getVolumes().iterator();
 		VolumeDetailsObject item = null;

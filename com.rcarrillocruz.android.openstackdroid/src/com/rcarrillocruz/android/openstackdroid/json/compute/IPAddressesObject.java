@@ -13,7 +13,6 @@ public class IPAddressesObject {
 
 	public IPAddressesObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<IPAddressObject> getPrivateAddresses() {

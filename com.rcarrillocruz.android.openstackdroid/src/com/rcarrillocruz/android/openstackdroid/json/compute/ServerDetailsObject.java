@@ -13,7 +13,6 @@ public class ServerDetailsObject {
 	
 	public ServerDetailsObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

@@ -11,7 +11,6 @@ public class VolumeModel {
 	
 	public VolumeModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public VolumeModel(String id, String name, String description,

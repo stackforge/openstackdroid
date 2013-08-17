@@ -9,7 +9,6 @@ public class EndpointObject {
 	
 
 	public EndpointObject() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public String getAdminURL() {

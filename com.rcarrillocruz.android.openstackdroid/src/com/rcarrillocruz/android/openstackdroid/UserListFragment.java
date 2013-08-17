@@ -22,7 +22,6 @@ public class UserListFragment extends CloudBrowserListFragment {
 	private ArrayAdapter<UserModel> adapter;
 	
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		users = ((CloudBrowserActivity) getActivity()).getUsers();
         endpoint = ((OpenstackdroidApplication) (getActivity().getApplication())).getIdentityAdminEndpoint();
@@ -44,9 +43,7 @@ public class UserListFragment extends CloudBrowserListFragment {
 
 	}
 	
-	@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-    	// TODO Auto-generated method stub
 		mCurCheckPosition = position;
 		getListView().setItemChecked(position, true);
 		
@@ -54,7 +51,6 @@ public class UserListFragment extends CloudBrowserListFragment {
     }
 
 	protected void showDetails(int position) {
-		// TODO Auto-generated method stub
 		UserDetailsFragment udf = (UserDetailsFragment) ((CloudBrowserActivity) getActivity()).getmUserDetailsFragment();
 		
 		if (udf == null || udf.getShownIndex() != position) 
@@ -67,9 +63,7 @@ public class UserListFragment extends CloudBrowserListFragment {
 	    ((CloudBrowserActivity) getActivity()).showDetailsLayout();
 	}
 
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			String operation = resultData.getString(CloudControllerService.OPERATION);
 			
@@ -83,7 +77,6 @@ public class UserListFragment extends CloudBrowserListFragment {
 	}
     
 	private void populateItems(GetUsersResponse gur) {
-		// TODO Auto-generated method stub
 		users.clear();
 		Iterator<UserDetailsObject> it = gur.getUsers().iterator();
 		UserDetailsObject item = null;

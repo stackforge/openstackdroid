@@ -14,7 +14,6 @@ public class ImageDetailsObject {
 	
     public ImageDetailsObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getChecksum() {

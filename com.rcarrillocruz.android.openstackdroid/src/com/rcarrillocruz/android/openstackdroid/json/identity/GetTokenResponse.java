@@ -5,7 +5,6 @@ public class GetTokenResponse {
 	
 	public GetTokenResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public AccessObject getAccess() {

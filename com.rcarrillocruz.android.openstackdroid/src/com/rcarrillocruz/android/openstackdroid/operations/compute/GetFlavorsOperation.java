@@ -15,10 +15,8 @@ public class GetFlavorsOperation implements ApiOperation {
 		super();	
 	}
 	
-	@Override
 	public HttpRequestBase invoke(Uri endpoint, String token, String tenantId,
 			Bundle params) {
-		// TODO Auto-generated method stub
 		HttpGet httpGet = new HttpGet(endpoint.toString() + urlTail);
 		httpGet.setHeader("X-Auth-Token", token);
 

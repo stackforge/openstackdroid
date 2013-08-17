@@ -15,6 +15,5 @@ public class GetUsersResponse {
 
 	public GetUsersResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 }

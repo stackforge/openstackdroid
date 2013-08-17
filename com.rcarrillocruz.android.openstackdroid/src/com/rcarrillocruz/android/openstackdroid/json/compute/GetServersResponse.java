@@ -7,7 +7,6 @@ public class GetServersResponse {
 
 	public GetServersResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<ServerDetailsObject> getServers() {

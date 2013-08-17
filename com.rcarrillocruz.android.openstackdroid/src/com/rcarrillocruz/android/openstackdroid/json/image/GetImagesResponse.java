@@ -7,7 +7,6 @@ public class GetImagesResponse {
 	
 	public GetImagesResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<ImageDetailsObject> getImages() {

@@ -15,11 +15,9 @@ public class ServerModel {
 	
 	public ServerModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public ServerModel(String id, String name) {
-		// TODO Auto-generated constructor stub
 		super();
 		this.id = id;
 		this.name = name;
@@ -119,7 +117,6 @@ public class ServerModel {
 
 	@Override
 	public boolean equals(Object o) {
-		// TODO Auto-generated method stub
 		return (this.getId().equals(((ServerModel)o).getId()));
 	}
 

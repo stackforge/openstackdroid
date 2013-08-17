@@ -8,7 +8,6 @@ public class FlavorObject {
 	
 	public FlavorObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

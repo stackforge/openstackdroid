@@ -22,7 +22,6 @@ public class FlavorDetailsObject {
 	
 	public FlavorDetailsObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

@@ -7,7 +7,6 @@ public class GetFlavorsResponse {
 
 	public GetFlavorsResponse() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public List<FlavorDetailsObject> getFlavors() {

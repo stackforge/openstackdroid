@@ -6,7 +6,6 @@ public class LinkObject {
 	
 	public LinkObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getHref() {

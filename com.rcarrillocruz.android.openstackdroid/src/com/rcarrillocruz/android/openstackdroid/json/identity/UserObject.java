@@ -11,7 +11,6 @@ public class UserObject {
 	
 	public UserObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

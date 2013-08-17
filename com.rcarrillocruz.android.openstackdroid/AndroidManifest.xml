@@ -41,7 +41,8 @@
         <service android:name="com.rcarrillocruz.android.openstackdroid.CloudControllerService" />
         
         <provider
-            android:name="com.rcarrillocruz.android.openstackdroid.ConnectionProfileContentProvider"
+     		android:name="com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileContentProvider"
+     		android:exported="false"
             android:authorities="com.rcarrillocruz.android.openstackdroid" >
         </provider>
     </application>

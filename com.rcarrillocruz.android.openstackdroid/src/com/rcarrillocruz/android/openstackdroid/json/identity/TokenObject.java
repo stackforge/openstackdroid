@@ -8,7 +8,6 @@ public class TokenObject {
 	
 	public TokenObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {

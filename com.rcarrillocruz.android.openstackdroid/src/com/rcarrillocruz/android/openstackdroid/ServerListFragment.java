@@ -4,31 +4,26 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
 import com.google.gson.Gson;
-import com.rcarrillocruz.android.openstackdroid.CloudControllerResultReceiver.Receiver;
 import com.rcarrillocruz.android.openstackdroid.json.compute.GetServersResponse;
 import com.rcarrillocruz.android.openstackdroid.json.compute.IPAddressObject;
 import com.rcarrillocruz.android.openstackdroid.json.compute.ServerDetailsObject;
 import com.rcarrillocruz.android.openstackdroid.model.IPAddressModel;
 import com.rcarrillocruz.android.openstackdroid.model.ServerModel;
 
-import android.app.FragmentTransaction;
-import android.app.ListFragment;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.os.Handler;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
 public class ServerListFragment extends CloudBrowserListFragment {
 	List<ServerModel> servers;
 	private ArrayAdapter<ServerModel> adapter;
     
-    @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
 		servers = ((CloudBrowserActivity) getActivity()).getServers();
         endpoint = ((OpenstackdroidApplication) (getActivity().getApplication())).getComputeEndpoint();
@@ -50,9 +45,7 @@ public class ServerListFragment extends CloudBrowserListFragment {
 
 	}
 
-	@Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-    	// TODO Auto-generated method stub
 		mCurCheckPosition = position;
 		getListView().setItemChecked(position, true);
 		
@@ -60,7 +53,6 @@ public class ServerListFragment extends CloudBrowserListFragment {
     }
 
 	protected void showDetails(int position) {
-		// TODO Auto-generated method stub
 		ServerDetailsFragment sdf = (ServerDetailsFragment) ((CloudBrowserActivity) getActivity()).getmServerDetailsFragment();
 		
 		if (sdf == null || sdf.getShownIndex() != position) 
@@ -73,9 +65,7 @@ public class ServerListFragment extends CloudBrowserListFragment {
 	    ((CloudBrowserActivity) getActivity()).showDetailsLayout();
 	}
 
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			String operation = resultData.getString(CloudControllerService.OPERATION);
 			
@@ -89,7 +79,6 @@ public class ServerListFragment extends CloudBrowserListFragment {
 	}
     
 	private void populateItems(GetServersResponse gsr) {
-		// TODO Auto-generated method stub
 		servers.clear();
 		Iterator<ServerDetailsObject> it = gsr.getServers().iterator();
 		ServerDetailsObject item = null;

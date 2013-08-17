@@ -4,7 +4,6 @@ public class RoleObject {
 	private String name;
 	
 	public RoleObject() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getName() {

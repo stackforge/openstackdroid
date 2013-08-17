@@ -6,7 +6,6 @@ public class GetTokenRequest {
 
 	public GetTokenRequest() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public GetTokenRequest(AuthObject auth) {

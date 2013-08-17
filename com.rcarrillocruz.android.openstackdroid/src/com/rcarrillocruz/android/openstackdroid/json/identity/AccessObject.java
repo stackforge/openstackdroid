@@ -10,7 +10,6 @@ public class AccessObject {
 
 	public AccessObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public TokenObject getToken() {

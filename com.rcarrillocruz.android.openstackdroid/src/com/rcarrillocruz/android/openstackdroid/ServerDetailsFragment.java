@@ -19,7 +19,6 @@ public class ServerDetailsFragment extends Fragment {
 	private TextView tv;
 	
 	public static ServerDetailsFragment newInstance(int position) {
-		// TODO Auto-generated method stub
 		ServerDetailsFragment f = new ServerDetailsFragment();
 		
 		Bundle args = new Bundle();
@@ -30,11 +29,9 @@ public class ServerDetailsFragment extends Fragment {
 	}
 
 	public int getShownIndex() {
-		// TODO Auto-generated method stub
 		return getArguments().getInt("position", 0);
 	}
 
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     	
         scroller = new ScrollView(getActivity());

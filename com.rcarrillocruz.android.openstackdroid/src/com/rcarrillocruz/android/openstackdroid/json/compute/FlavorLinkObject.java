@@ -6,7 +6,6 @@ public class FlavorLinkObject {
 	
 	public FlavorLinkObject() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getHref() {

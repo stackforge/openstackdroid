@@ -6,7 +6,6 @@ public class IPAddressModel {
 	
 	public IPAddressModel() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public IPAddressModel(String addr, int version) {

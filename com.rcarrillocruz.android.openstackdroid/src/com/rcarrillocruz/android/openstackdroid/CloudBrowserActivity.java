@@ -105,7 +105,6 @@ public class CloudBrowserActivity extends Activity implements TabListener {
 		    }    
 	}
 	
-	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch(item.getItemId()) {
 		case android.R.id.home:
@@ -125,15 +124,11 @@ public class CloudBrowserActivity extends Activity implements TabListener {
 		}
 	}
 
-	@Override
 	public void onTabReselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void onTabSelected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
 		Class<?> tabClass = null;
 		
 		switch(tab.getPosition()) {
@@ -239,9 +234,7 @@ public class CloudBrowserActivity extends Activity implements TabListener {
         
 	}
 
-	@Override
 	public void onTabUnselected(Tab tab, FragmentTransaction ft) {
-		// TODO Auto-generated method stub
 		if (mListFragmentAttached != null)
 			ft.detach(mListFragmentAttached);
 	}

@@ -1,5 +1,12 @@
 package com.rcarrillocruz.android.openstackdroid;
 
+import com.rcarrillocruz.android.openstackdroid.R;
+import com.rcarrillocruz.android.openstackdroid.R.id;
+import com.rcarrillocruz.android.openstackdroid.R.layout;
+import com.rcarrillocruz.android.openstackdroid.R.menu;
+import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileContentProvider;
+import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileTable;
+
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -18,9 +25,7 @@ public class ConnectionProfileActivity extends Activity {
 	private EditText mPassword;
 	private EditText mTenantId;
 	
-	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.connection_profile_activity);
 		
@@ -56,7 +61,6 @@ public class ConnectionProfileActivity extends Activity {
 	}
 
 	private void saveConnectionProfile() {
-		// TODO Auto-generated method stub
 		String profileName = (String) mProfileName.getText().toString();
 		String endpoint = mEndpoint.getText().toString();
 		String username = mUsername.getText().toString();
@@ -80,7 +84,6 @@ public class ConnectionProfileActivity extends Activity {
 	}
 
     private void populateForm(Uri uri) {
-		// TODO Auto-generated method stub
     	String[] projection = {ConnectionProfileTable.COLUMN_PROFILE_NAME, ConnectionProfileTable.COLUMN_ENDPOINT, 
     						   ConnectionProfileTable.COLUMN_USERNAME, ConnectionProfileTable.COLUMN_PASSWORD,
     						   ConnectionProfileTable.COLUMN_TENANT_ID};

@@ -20,10 +20,8 @@ public class FlavorListFragment extends CloudBrowserListFragment {
 	List<FlavorModel> flavors;
 	private ArrayAdapter<FlavorModel> adapter;
     
-    @Override
 	public void onActivityCreated(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-    	super.onActivityCreated(savedInstanceState);
+		super.onActivityCreated(savedInstanceState);
         endpoint = ((OpenstackdroidApplication) (getActivity().getApplication())).getComputeEndpoint();
 		flavors = ((CloudBrowserActivity) getActivity()).getFlavors();
 		
@@ -44,18 +42,14 @@ public class FlavorListFragment extends CloudBrowserListFragment {
 
 	}
     
-	@Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-    	// TODO Auto-generated method stub
-		mCurCheckPosition = position;
+	public void onListItemClick(ListView l, View v, int position, long id) {
+    	mCurCheckPosition = position;
 		getListView().setItemChecked(position, true);
 		
 		showDetails(position);      
     }
 	
-	@Override
 	protected void showDetails(int position) {
-		// TODO Auto-generated method stub
 		FlavorDetailsFragment fdf = (FlavorDetailsFragment) ((CloudBrowserActivity) getActivity()).getmFlavorDetailsFragment();
 		
 		if (fdf == null || fdf.getShownIndex() != position) 
@@ -68,9 +62,7 @@ public class FlavorListFragment extends CloudBrowserListFragment {
 	    ((CloudBrowserActivity) getActivity()).showDetailsLayout();
 	}
 	
-	@Override
 	public void onReceiveResult(int resultCode, Bundle resultData) {
-		// TODO Auto-generated method stub
 		if (resultCode == 200) {
 			String operation = resultData.getString(CloudControllerService.OPERATION);
 			
@@ -84,7 +76,6 @@ public class FlavorListFragment extends CloudBrowserListFragment {
 	}
     
 	private void populateItems(GetFlavorsResponse gfr) {
-		// TODO Auto-generated method stub
 		flavors.clear();
 		Iterator<FlavorDetailsObject> it = gfr.getFlavors().iterator();
 		FlavorDetailsObject item = null;

@@ -7,7 +7,6 @@ public class TenantObject {
 	private String description;
 	
 	public TenantObject() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public String getId() {
