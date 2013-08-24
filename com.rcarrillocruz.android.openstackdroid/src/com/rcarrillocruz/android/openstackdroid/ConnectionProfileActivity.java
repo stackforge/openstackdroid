@@ -1,12 +1,5 @@
 package com.rcarrillocruz.android.openstackdroid;
 
-import com.rcarrillocruz.android.openstackdroid.R;
-import com.rcarrillocruz.android.openstackdroid.R.id;
-import com.rcarrillocruz.android.openstackdroid.R.layout;
-import com.rcarrillocruz.android.openstackdroid.R.menu;
-import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileContentProvider;
-import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileTable;
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -15,6 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+
+import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileContentProvider;
+import com.rcarrillocruz.android.openstackdroid.db.connectionprofile.ConnectionProfileTable;
 
 public class ConnectionProfileActivity extends Activity {
 	private Uri connectionProfileUri;
